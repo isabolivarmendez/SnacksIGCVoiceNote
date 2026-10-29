@@ -4,14 +4,14 @@
   const steps = ["step-name", "step-record", "step-review", "step-done"];
   const show = (id) => steps.forEach((s) => $(s).classList.toggle("active", s === id));
 
-  const cfg = window.WISHERS_CONFIG || {};
+  const cfg = window.APP_CONFIG || {};
   const sb = cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY && window.supabase
     ? window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY, { auth: { persistSession: false } })
     : null;
   if (!sb) $("setup-warn").hidden = false;
 
   let name = "";
-  try { name = localStorage.getItem("wishers_name") || ""; } catch {}
+  try { name = localStorage.getItem("snack_name") || ""; } catch {}
   $("name").value = name;
 
   // Idioma por defecto según el navegador
@@ -75,8 +75,8 @@
     const v = $("name").value.trim();
     if (!v) { $("name-error").textContent = "Please enter your name."; return; }
     name = v;
-    try { localStorage.setItem("wishers_name", v); } catch {}
-    $("hello").textContent = `Nice to meet you, ${v.split(" ")[0]}`;
+    try { localStorage.setItem("snack_name", v); } catch {}
+    $("hello").textContent = `Hi, ${v.split(" ")[0]}!`;
     resetRecorder();
     show("step-record");
   });
@@ -92,7 +92,8 @@
 
   function resetRecorder() {
     $("timer").textContent = "0:00";
-    $("rec-hint").textContent = `Tap to start · up to ${MAX_SECONDS / 60} minutes`;
+    $("rec-title").textContent = "Tap & talk";
+    $("rec-hint").textContent = `It only takes a minute · max ${MAX_SECONDS / 60} min`;
     $("rec-error").textContent = "";
     $("live").hidden = true;
     $("live").textContent = "";
@@ -131,7 +132,8 @@
     $("lang").disabled = true;
     $("mic").classList.add("recording");
     $("mic").setAttribute("aria-label", "Stop recording");
-    $("rec-hint").textContent = "Recording… tap to stop";
+    $("rec-title").textContent = "Recording…";
+    $("rec-hint").textContent = "Tap the button to stop";
     tick = setInterval(() => {
       duration = (Date.now() - startedAt) / 1000;
       $("timer").textContent = fmt(duration);
@@ -153,7 +155,8 @@
       $("rec-error").textContent = "That was very short — try again and tell us a bit more!";
       return;
     }
-    $("rec-hint").textContent = "Finishing…";
+    $("rec-title").textContent = "Finishing…";
+    $("rec-hint").textContent = "";
     recorder.stop();
   }
 
@@ -172,7 +175,7 @@
       for (let i = 0; i < bars; i++) {
         const v = data[Math.floor((i / bars) * data.length * 0.7)] / 255;
         const h = Math.max(4, v * canvas.height);
-        ctx.fillStyle = "#e2573b";
+        ctx.fillStyle = "#1b1b1b";
         ctx.globalAlpha = 0.35 + v * 0.65;
         ctx.beginPath();
         ctx.roundRect ? ctx.roundRect(i * w + 2, (canvas.height - h) / 2, w - 4, h, 3) : ctx.rect(i * w + 2, (canvas.height - h) / 2, w - 4, h);
@@ -205,7 +208,7 @@
       : "We couldn't transcribe automatically. If you can, type a quick version of what you said (optional)";
     $("send-error").textContent = "";
     $("send").disabled = false;
-    $("send").textContent = "Send voice note";
+    $("send").textContent = "Send it";
     show("step-review");
   }
   $("redo").addEventListener("click", () => { resetRecorder(); show("step-record"); });
@@ -235,7 +238,7 @@
       console.error(err);
       $("send-error").textContent = "Something went wrong sending your note. Please try again.";
       $("send").disabled = false;
-      $("send").textContent = "Send voice note";
+      $("send").textContent = "Send it";
     }
   });
 

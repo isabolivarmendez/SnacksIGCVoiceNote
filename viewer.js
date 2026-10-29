@@ -1,6 +1,6 @@
 (() => {
   const $ = (id) => document.getElementById(id);
-  const cfg = window.WISHERS_CONFIG || {};
+  const cfg = window.APP_CONFIG || {};
   const sb = cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY && window.supabase
     ? window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY)
     : null;
@@ -113,14 +113,14 @@
     const corpus = withText
       .map((n, i) => `<note index="${i + 1}" speaker="${n.name.replace(/"/g, "'")}">\n${n.transcript}\n</note>`)
       .join("\n");
-    return `Below ${withText.length === 1 ? "is 1 transcript" : `are ${withText.length} transcripts`} of voice notes in which people describe "Wishers" to a friend who has never tried them and highlight what they like most. The transcripts were made automatically by a web browser, so expect some misheard words.
+    return `Below ${withText.length === 1 ? "is 1 transcript" : `are ${withText.length} transcripts`} of voice notes in which people describe the snacks they tasted to a friend who has never tried them and highlight what they like most. The transcripts were made automatically by a web browser, so expect some misheard words.
 
 ${corpus}
 
 Please analyze ONLY what is in these transcripts and give me:
 
-1. **Overview** — 2-4 sentences on how people describe Wishers overall.
-2. **Adjectives ranked** — a table with every adjective used to describe Wishers (not adjectives about other things), with columns: adjective · number of notes that used it · a short example quote · sentiment (positive/neutral/negative). Normalize variants (e.g. "tastier" → "tasty") and sort from most to least used. If a transcript is in another language, keep the original word and add the English translation.
+1. **Overview** — 2-4 sentences on how people describe the snacks overall.
+2. **Adjectives ranked** — a table with every adjective used to describe the snacks (not adjectives about other things), with columns: adjective · number of notes that used it · a short example quote · sentiment (positive/neutral/negative). Normalize variants (e.g. "tastier" → "tasty") and sort from most to least used. If a transcript is in another language, keep the original word and add the English translation.
 3. **What people like most** — a ranked list, most-cited first.
 4. **Themes** — up to 6 recurring themes, one sentence each, with how many notes mention them.
 

@@ -3,35 +3,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tell us about Wishers</title>
+  <title>We want to hear you</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <svg class="dunes" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="d1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecc6f2"/><stop offset="1" stop-color="#e3a9bf"/></linearGradient>
+    <linearGradient id="d2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9de86"/><stop offset="1" stop-color="#eeac45"/></linearGradient>
+    <linearGradient id="d3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bb9a82"/><stop offset="1" stop-color="#a2482a"/></linearGradient>
+  </defs>
+  <path d="M0 70 C 220 10, 430 20, 640 55 S 1100 120, 1440 30 L1440 300 L0 300Z" fill="url(#d1)"/>
+  <path d="M0 150 C 260 95, 520 110, 760 140 S 1180 120, 1440 105 L1440 300 L0 300Z" fill="url(#d2)"/>
+  <path d="M0 250 C 260 190, 520 160, 760 175 S 1200 240, 1440 205 L1440 300 L0 300Z" fill="url(#d3)"/>
+</svg>
+  <div class="page">
   <main class="shell">
-    <div class="brand">Wishers</div>
-
     <div class="warn-box" id="setup-warn" hidden>This page isn't connected yet: fill in <code>config.js</code> with your Supabase details.</div>
 
     <!-- 1. Nombre -->
     <section class="step card active" id="step-name">
-      <h1>Hi! What's your name?</h1>
-      <p class="muted">We'll use it to know who left each voice note.</p>
+      <svg class="seal" viewBox="0 0 112 112" aria-hidden="true"><polygon points="56.0,2.0 62.7,9.5 71.2,4.2 75.5,13.2 85.2,10.6 86.8,20.5 96.8,20.6 95.5,30.6 105.1,33.6 101.1,42.8 109.5,48.3 103.0,56.0 109.5,63.7 101.1,69.2 105.1,78.4 95.5,81.4 96.8,91.4 86.8,91.5 85.2,101.4 75.5,98.8 71.2,107.8 62.7,102.5 56.0,110.0 49.3,102.5 40.8,107.8 36.5,98.8 26.8,101.4 25.2,91.5 15.2,91.4 16.5,81.4 6.9,78.4 10.9,69.2 2.5,63.7 9.0,56.0 2.5,48.3 10.9,42.8 6.9,33.6 16.5,30.6 15.2,20.6 25.2,20.5 26.8,10.6 36.5,13.2 40.8,4.2 49.3,9.5" fill="#fff" stroke="#1b1b1b" stroke-width="2.5" stroke-linejoin="round"/><text x="56" y="42" text-anchor="middle">We want</text><text x="56" y="61" text-anchor="middle" font-size="15">to hear</text><text x="56" y="80" text-anchor="middle">&#10022; You &#10022;</text></svg>
+      <svg class="sparkle " style="top:-22px;left:46%" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z" fill="currentColor"/></svg><svg class="sparkle white" style="top:-10px;left:54%" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z" fill="currentColor"/></svg>
+      <h1>Thank you!</h1>
+      <p>Thank you so much for helping us taste the different snacks. Every bite brings us closer to a better product.</p>
+      <div class="tagline">This time, we want to <span class="hear-tag">hear</span> you.</div>
       <form id="name-form">
+        <label class="section-label" for="name" style="display:block;margin-top:0">First, what's your name?</label>
         <input class="input" id="name" autocomplete="name" maxlength="80" placeholder="Your name" required />
         <div class="error" id="name-error"></div>
-        <button class="btn" type="submit" style="width:100%;margin-top:.5rem">Continue</button>
+        <button class="btn" type="submit" style="width:100%;margin-top:.4rem">Let's go</button>
       </form>
     </section>
 
     <!-- 2. Grabar -->
     <section class="step card" id="step-record">
-      <h1 id="hello">Nice to meet you</h1>
-      <div class="prompt">
-        <strong>Your prompt</strong>
-        Record a voice note telling us how you'd describe Wishers to a friend who has never tried them. Highlight what you like most about them.
-      </div>
+      <svg class="seal" viewBox="0 0 112 112" aria-hidden="true"><polygon points="56.0,2.0 62.7,9.5 71.2,4.2 75.5,13.2 85.2,10.6 86.8,20.5 96.8,20.6 95.5,30.6 105.1,33.6 101.1,42.8 109.5,48.3 103.0,56.0 109.5,63.7 101.1,69.2 105.1,78.4 95.5,81.4 96.8,91.4 86.8,91.5 85.2,101.4 75.5,98.8 71.2,107.8 62.7,102.5 56.0,110.0 49.3,102.5 40.8,107.8 36.5,98.8 26.8,101.4 25.2,91.5 15.2,91.4 16.5,81.4 6.9,78.4 10.9,69.2 2.5,63.7 9.0,56.0 2.5,48.3 10.9,42.8 6.9,33.6 16.5,30.6 15.2,20.6 25.2,20.5 26.8,10.6 36.5,13.2 40.8,4.2 49.3,9.5" fill="#fff" stroke="#1b1b1b" stroke-width="2.5" stroke-linejoin="round"/><text x="56" y="42" text-anchor="middle">We want</text><text x="56" y="61" text-anchor="middle" font-size="15">to hear</text><text x="56" y="80" text-anchor="middle">&#10022; You &#10022;</text></svg>
+      <h1 id="hello" style="font-size:clamp(1.8rem,7vw,2.4rem)">Hi there</h1>
+      <ol class="steps-list" style="margin-top:1rem">
+        <li><span class="num">1</span><span>Record a voice note telling us how you'd describe the snacks to a friend who has never tried them</span></li>
+        <li><span class="num">2</span><span>Tell us what you like most about them</span></li>
+      </ol>
       <div class="lang-row" id="lang-row">
-        <label for="lang" class="muted">I'll speak in</label>
+        <label for="lang">I'll speak in</label>
         <select id="lang" class="select">
           <option value="en-US">English</option>
           <option value="es-ES">Español</option>
@@ -40,16 +54,16 @@
       </div>
       <div class="recorder">
         <button class="mic" id="mic" aria-label="Start recording">
-          <svg class="ico-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/></svg>
+          <svg class="ico-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
           <svg class="ico-stop" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
         </button>
         <div class="timer" id="timer">0:00</div>
-        <canvas class="wave" id="wave" width="600" height="56"></canvas>
-        <div class="muted" id="rec-hint">Tap to start · up to 3 minutes</div>
+        <canvas class="wave" id="wave" width="600" height="50"></canvas>
+        <div class="scan-talk"><div><b id="rec-title">Tap &amp; talk</b><span id="rec-hint">It only takes a minute</span></div></div>
       </div>
       <div class="live" id="live" hidden></div>
       <div class="error" id="rec-error"></div>
-      <div class="fallback muted" id="fallback" hidden>
+      <div class="fallback" id="fallback" hidden>
         Can't use the microphone here?
         <label for="file-input">Record or upload an audio file instead</label>
         <input type="file" id="file-input" accept="audio/*" capture hidden />
@@ -59,25 +73,28 @@
     <!-- 3. Revisar -->
     <section class="step card review" id="step-review">
       <h1>Sounds good?</h1>
-      <p class="muted">Listen back, then send it — or record again.</p>
+      <p>Listen back, then send it — or record again.</p>
       <audio id="preview" controls></audio>
       <label class="section-label" for="transcript" id="transcript-label">Here's what we heard — fix anything we got wrong</label>
       <textarea class="input textarea" id="transcript" rows="5" maxlength="10000" placeholder="Transcript"></textarea>
       <div class="error" id="send-error"></div>
       <div class="row">
         <button class="btn ghost" id="redo">Record again</button>
-        <button class="btn" id="send">Send voice note</button>
+        <button class="btn" id="send">Send it</button>
       </div>
     </section>
 
     <!-- 4. Gracias -->
     <section class="step card" id="step-done">
-      <div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+      <svg class="sparkle " style="top:-22px;left:62%" width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z" fill="currentColor"/></svg><svg class="sparkle white" style="top:-6px;left:71%" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z" fill="currentColor"/></svg><svg class="sparkle " style="top:18px;left:69%" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z" fill="currentColor"/></svg>
+      <div class="check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
       <h1>Thank you!</h1>
-      <p class="muted">Your voice note was sent. We really appreciate you sharing what you love about Wishers.</p>
-      <button class="btn ghost" id="another" style="margin-top:.5rem">Record another one</button>
+      <p>Your voice note was sent. We really appreciate you sharing what you love about the snacks.</p>
+      <div class="tagline">Every <span class="hear-tag">word</span> counts.</div>
+      <button class="btn ghost" id="another">Record another one</button>
     </section>
   </main>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="config.js"></script>
   <script src="app.js"></script>
