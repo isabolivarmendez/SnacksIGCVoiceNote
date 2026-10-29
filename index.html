@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tell us about Wishers</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <div class="brand">Wishers</div>
+
+    <div class="warn-box" id="setup-warn" hidden>This page isn't connected yet: fill in <code>config.js</code> with your Supabase details.</div>
+
+    <!-- 1. Nombre -->
+    <section class="step card active" id="step-name">
+      <h1>Hi! What's your name?</h1>
+      <p class="muted">We'll use it to know who left each voice note.</p>
+      <form id="name-form">
+        <input class="input" id="name" autocomplete="name" maxlength="80" placeholder="Your name" required />
+        <div class="error" id="name-error"></div>
+        <button class="btn" type="submit" style="width:100%;margin-top:.5rem">Continue</button>
+      </form>
+    </section>
+
+    <!-- 2. Grabar -->
+    <section class="step card" id="step-record">
+      <h1 id="hello">Nice to meet you</h1>
+      <div class="prompt">
+        <strong>Your prompt</strong>
+        Record a voice note telling us how you'd describe Wishers to a friend who has never tried them. Highlight what you like most about them.
+      </div>
+      <div class="lang-row" id="lang-row">
+        <label for="lang" class="muted">I'll speak in</label>
+        <select id="lang" class="select">
+          <option value="en-US">English</option>
+          <option value="es-ES">Español</option>
+          <option value="pt-BR">Português</option>
+        </select>
+      </div>
+      <div class="recorder">
+        <button class="mic" id="mic" aria-label="Start recording">
+          <svg class="ico-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v5"/></svg>
+          <svg class="ico-stop" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+        </button>
+        <div class="timer" id="timer">0:00</div>
+        <canvas class="wave" id="wave" width="600" height="56"></canvas>
+        <div class="muted" id="rec-hint">Tap to start · up to 3 minutes</div>
+      </div>
+      <div class="live" id="live" hidden></div>
+      <div class="error" id="rec-error"></div>
+      <div class="fallback muted" id="fallback" hidden>
+        Can't use the microphone here?
+        <label for="file-input">Record or upload an audio file instead</label>
+        <input type="file" id="file-input" accept="audio/*" capture hidden />
+      </div>
+    </section>
+
+    <!-- 3. Revisar -->
+    <section class="step card review" id="step-review">
+      <h1>Sounds good?</h1>
+      <p class="muted">Listen back, then send it — or record again.</p>
+      <audio id="preview" controls></audio>
+      <label class="section-label" for="transcript" id="transcript-label">Here's what we heard — fix anything we got wrong</label>
+      <textarea class="input textarea" id="transcript" rows="5" maxlength="10000" placeholder="Transcript"></textarea>
+      <div class="error" id="send-error"></div>
+      <div class="row">
+        <button class="btn ghost" id="redo">Record again</button>
+        <button class="btn" id="send">Send voice note</button>
+      </div>
+    </section>
+
+    <!-- 4. Gracias -->
+    <section class="step card" id="step-done">
+      <div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+      <h1>Thank you!</h1>
+      <p class="muted">Your voice note was sent. We really appreciate you sharing what you love about Wishers.</p>
+      <button class="btn ghost" id="another" style="margin-top:.5rem">Record another one</button>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

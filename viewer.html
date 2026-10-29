@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wishers · Voice notes dashboard</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="login-wrap" id="login" hidden>
+    <form class="card" id="login-form">
+      <div class="brand" style="margin-bottom:1rem">Wishers</div>
+      <h1 style="font-size:1.5rem;margin-bottom:.5rem">Viewer access</h1>
+      <p class="muted" style="margin-top:0">Sign in to see all voice notes.</p>
+      <div class="warn-box" id="setup-warn" hidden>Not connected yet: fill in <code>config.js</code> with your Supabase details.</div>
+      <input class="input" type="email" id="email" placeholder="Email" required autocomplete="username" style="margin-bottom:.6rem" />
+      <input class="input" type="password" id="password" placeholder="Password" required autocomplete="current-password" />
+      <div class="error" id="login-error"></div>
+      <button class="btn" style="width:100%;margin-top:.5rem">Sign in</button>
+    </form>
+  </div>
+
+  <main class="dash" id="dash" hidden>
+    <div class="topbar">
+      <div>
+        <div class="brand" style="margin-bottom:.25rem">Wishers</div>
+        <h1>Voice notes</h1>
+      </div>
+      <div style="display:flex;gap:.5rem">
+        <button class="btn ghost small" id="refresh">Refresh</button>
+        <button class="btn ghost small" id="logout">Log out</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="s-total">0</b><span>voice notes</span></div>
+      <div class="stat"><b id="s-done">0</b><span>with transcript</span></div>
+      <div class="stat"><b id="s-people">0</b><span>people</span></div>
+      <div class="stat"><b id="s-time">0:00</b><span>total listening time</span></div>
+    </div>
+
+    <div class="grid">
+      <section class="panel">
+        <div class="panel-head"><h2>All recordings</h2></div>
+        <input class="input search" id="search" placeholder="Search names or transcripts…" />
+        <div id="notes"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>AI summary of adjectives</h2></div>
+        <ol class="howto">
+          <li>Click <b>Copy for Claude</b>. It copies every transcript plus the instructions for the analysis.</li>
+          <li>Open a new chat at <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai</a> and paste.</li>
+          <li>Claude replies with the adjectives ranked by how often they're used, what people like most, and the main themes.</li>
+        </ol>
+        <button class="btn" id="copy" style="width:100%">Copy for Claude</button>
+        <div class="ok-msg" id="copy-msg"></div>
+        <textarea class="input textarea" id="copy-fallback" rows="8" readonly hidden></textarea>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>
