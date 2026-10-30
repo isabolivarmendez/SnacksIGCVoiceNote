@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voice notes dashboard</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <svg class="dunes" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="d1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecc6f2"/><stop offset="1" stop-color="#e3a9bf"/></linearGradient>
+    <linearGradient id="d2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9de86"/><stop offset="1" stop-color="#eeac45"/></linearGradient>
+    <linearGradient id="d3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bb9a82"/><stop offset="1" stop-color="#a2482a"/></linearGradient>
+  </defs>
+  <path d="M0 70 C 220 10, 430 20, 640 55 S 1100 120, 1440 30 L1440 300 L0 300Z" fill="url(#d1)"/>
+  <path d="M0 150 C 260 95, 520 110, 760 140 S 1180 120, 1440 105 L1440 300 L0 300Z" fill="url(#d2)"/>
+  <path d="M0 250 C 260 190, 520 160, 760 175 S 1200 240, 1440 205 L1440 300 L0 300Z" fill="url(#d3)"/>
+</svg>
+  <div class="page">
+  <div class="login-wrap" id="login" hidden>
+    <form class="card" id="login-form">
+      <svg class="seal" viewBox="0 0 112 112" aria-hidden="true"><polygon points="56.0,2.0 62.7,9.5 71.2,4.2 75.5,13.2 85.2,10.6 86.8,20.5 96.8,20.6 95.5,30.6 105.1,33.6 101.1,42.8 109.5,48.3 103.0,56.0 109.5,63.7 101.1,69.2 105.1,78.4 95.5,81.4 96.8,91.4 86.8,91.5 85.2,101.4 75.5,98.8 71.2,107.8 62.7,102.5 56.0,110.0 49.3,102.5 40.8,107.8 36.5,98.8 26.8,101.4 25.2,91.5 15.2,91.4 16.5,81.4 6.9,78.4 10.9,69.2 2.5,63.7 9.0,56.0 2.5,48.3 10.9,42.8 6.9,33.6 16.5,30.6 15.2,20.6 25.2,20.5 26.8,10.6 36.5,13.2 40.8,4.2 49.3,9.5" fill="#fff" stroke="#1b1b1b" stroke-width="2.5" stroke-linejoin="round"/><text class="s-sm" x="56" y="41" text-anchor="middle">We want to</text><text class="s-big" x="56" y="63" text-anchor="middle">hear</text><text class="s-star" x="17" y="59" text-anchor="middle">&#10022;</text><text class="s-star" x="95" y="59" text-anchor="middle">&#10022;</text><text class="s-sm" x="56" y="80" text-anchor="middle">from you</text></svg>
+      <h1 style="font-size:2rem;margin-bottom:.5rem">Viewer access</h1>
+      <p class="muted" style="margin-top:0">Sign in to see all voice notes.</p>
+      <div class="warn-box" id="setup-warn" hidden>Not connected yet: fill in <code>config.js</code> with your Supabase details.</div>
+      <input class="input" type="email" id="email" placeholder="Email" required autocomplete="username" style="margin-bottom:.6rem" />
+      <input class="input" type="password" id="password" placeholder="Password" required autocomplete="current-password" />
+      <div class="error" id="login-error"></div>
+      <button class="btn" style="width:100%;margin-top:.5rem">Sign in</button>
+    </form>
+  </div>
+
+  <main class="dash" id="dash" hidden>
+    <div class="topbar">
+      <div>
+        <h1>What people <span class="hear-tag">said</span></h1>
+      </div>
+      <div class="top-actions">
+        <button class="btn yellow small" id="copy" title="Copies the transcripts shown (with your filters) plus the analysis instructions. Paste them into a new chat at claude.ai.">Copy for Claude</button>
+        <button class="btn ghost small" id="refresh">Refresh</button>
+        <button class="btn ghost small" id="logout">Log out</button>
+      </div>
+    </div>
+    <div class="ok-msg copy-msg" id="copy-msg"></div>
+    <textarea class="input textarea" id="copy-fallback" rows="6" readonly hidden></textarea>
+
+    <div class="stats">
+      <div class="stat"><b id="s-total">0</b><span>voice notes</span></div>
+      <div class="stat"><b id="s-done">0</b><span>with transcript</span></div>
+      <div class="stat"><b id="s-people">0</b><span>people</span></div>
+      <div class="stat"><b id="s-time">0:00</b><span>total listening time</span></div>
+    </div>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>All recordings</h2>
+        <span class="muted small-txt" id="result-count"></span>
+      </div>
+      <div class="filters">
+        <input class="input search" id="search" placeholder="Search names or transcripts…" />
+        <select class="select" id="f-name" aria-label="Filter by name"><option value="">All names</option></select>
+        <select class="select" id="f-lang" aria-label="Filter by language"><option value="">All languages</option></select>
+        <select class="select" id="f-status" aria-label="Filter by transcript">
+          <option value="">All notes</option>
+          <option value="with">With transcript</option>
+          <option value="without">Without transcript</option>
+        </select>
+        <select class="select" id="f-sort" aria-label="Sort">
+          <option value="new">Newest first</option>
+          <option value="old">Oldest first</option>
+          <option value="long">Longest first</option>
+        </select>
+        <button class="linkbtn" id="f-clear" type="button">Clear filters</button>
+      </div>
+      <div id="notes"></div>
+      <nav class="pager" id="pager" aria-label="Pages"></nav>
+    </section>
+  </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>
