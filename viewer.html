@@ -37,11 +37,14 @@
       <div>
         <h1>What people <span class="hear-tag">said</span></h1>
       </div>
-      <div style="display:flex;gap:.5rem">
+      <div class="top-actions">
+        <button class="btn yellow small" id="copy" title="Copies the transcripts shown (with your filters) plus the analysis instructions. Paste them into a new chat at claude.ai.">Copy for Claude</button>
         <button class="btn ghost small" id="refresh">Refresh</button>
         <button class="btn ghost small" id="logout">Log out</button>
       </div>
     </div>
+    <div class="ok-msg copy-msg" id="copy-msg"></div>
+    <textarea class="input textarea" id="copy-fallback" rows="6" readonly hidden></textarea>
 
     <div class="stats">
       <div class="stat"><b id="s-total">0</b><span>voice notes</span></div>
@@ -50,25 +53,30 @@
       <div class="stat"><b id="s-time">0:00</b><span>total listening time</span></div>
     </div>
 
-    <div class="grid">
-      <section class="panel">
-        <div class="panel-head"><h2>All recordings</h2></div>
+    <section class="panel">
+      <div class="panel-head">
+        <h2>All recordings</h2>
+        <span class="muted small-txt" id="result-count"></span>
+      </div>
+      <div class="filters">
         <input class="input search" id="search" placeholder="Search names or transcripts…" />
-        <div id="notes"></div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-head"><h2>AI summary of adjectives</h2></div>
-        <ol class="howto">
-          <li>Click <b>Copy for Claude</b>. It copies every transcript plus the instructions for the analysis.</li>
-          <li>Open a new chat at <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai</a> and paste.</li>
-          <li>Claude replies with the adjectives ranked by how often they're used, what people like most, what they didn't like, and the main themes.</li>
-        </ol>
-        <button class="btn yellow" id="copy" style="width:100%">Copy for Claude</button>
-        <div class="ok-msg" id="copy-msg"></div>
-        <textarea class="input textarea" id="copy-fallback" rows="8" readonly hidden></textarea>
-      </section>
-    </div>
+        <select class="select" id="f-name" aria-label="Filter by name"><option value="">All names</option></select>
+        <select class="select" id="f-lang" aria-label="Filter by language"><option value="">All languages</option></select>
+        <select class="select" id="f-status" aria-label="Filter by transcript">
+          <option value="">All notes</option>
+          <option value="with">With transcript</option>
+          <option value="without">Without transcript</option>
+        </select>
+        <select class="select" id="f-sort" aria-label="Sort">
+          <option value="new">Newest first</option>
+          <option value="old">Oldest first</option>
+          <option value="long">Longest first</option>
+        </select>
+        <button class="linkbtn" id="f-clear" type="button">Clear filters</button>
+      </div>
+      <div id="notes"></div>
+      <nav class="pager" id="pager" aria-label="Pages"></nav>
+    </section>
   </main>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
